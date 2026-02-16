@@ -9,6 +9,11 @@ class TestCalculator(unittest.TestCase):
     def test_add(self):
         self.assertEqual(self.calc.add(2, 3), 5)
 
+    def test_addition_zero(self):
+        """Test the add function with zero."""
+        result = add(0, 0)
+        self.assertEqual(result, 0)
+
     def test_sub(self):
         self.assertEqual(self.calc.subtract(2, 3), -1)
 

@@ -11,7 +11,7 @@ class TestCalculator(unittest.TestCase):
 
     def test_addition_zero(self):
         """Test the add function with zero."""
-        result = add(0, 0)
+        result = self.calc.add(0, 0)
         self.assertEqual(result, 0)
 
     def test_sub(self):

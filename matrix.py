@@ -48,3 +48,19 @@ def add_matrix(a: str, b: str) -> str:
         result.append(row)
     
     return _matrix_to_string(result)
+
+def transpose_matrix(a: str) -> str:
+    """Transpose a matrix"""
+    matrix_a = _parse_matrix(a)
+    
+    rows = len(matrix_a)
+    cols = len(matrix_a[0])
+    
+    result = []
+    for j in range(cols):
+        row = []
+        for i in range(rows):
+            row.append(matrix_a[i][j])
+        result.append(row)
+    
+    return _matrix_to_string(result)

@@ -1,5 +1,5 @@
 import unittest
-from matrix import add_matrix
+from matrix import add_matrix, transpose_matrix
 
 class TestMatrix(unittest.TestCase):
     
@@ -10,11 +10,29 @@ class TestMatrix(unittest.TestCase):
             "[[6, 8], [10, 12]]"
         )
     
+    def test_matrix_transpose(self):
+        self.assertEqual(
+            transpose_matrix("[[1,2,3],[4,5,6]]"),
+            "[[1, 4], [2, 5], [3, 6]]"
+        )
+    
     # Edge cases
     def test_1x1_matrix_add(self):
         self.assertEqual(
             add_matrix("[[5]]", "[[3]]"),
             "[[8]]"
+        )
+    
+    def test_1x1_matrix_transpose(self):
+        self.assertEqual(
+            transpose_matrix("[[5]]"),
+            "[[5]]"
+        )
+    
+    def test_non_square_matrix_transpose(self):
+        self.assertEqual(
+            transpose_matrix("[[1,2],[3,4],[5,6]]"),
+            "[[1, 3, 5], [2, 4, 6]]"
         )
     
     # Error cases
@@ -49,7 +67,14 @@ class TestMatrix(unittest.TestCase):
     def test_non_numeric_matrix(self):
         with self.assertRaises(ValueError):
             add_matrix("[[1,2],[3,'a']]", "[[4,5],[6,7]]")
-
+    
+    def test_transpose_empty_matrix(self):
+        with self.assertRaises(ValueError):
+            transpose_matrix("[]")
+    
+    def test_transpose_empty_row_matrix(self):
+        with self.assertRaises(ValueError):
+            transpose_matrix("[[]]")
 if __name__ == '__main__':
     unittest.main()
 
@@ -65,11 +90,19 @@ def print_matrix_operations():
     print(f"Matrix B: {matrix_b}")
     print()
     
+    
     # Addition
     try:
         result = add_matrix(matrix_a, matrix_b)
         print(f"Addition (A + B): {result}")
     except Exception as e:
         print(f"Addition Error: {e}")
+    
+    # Transpose
+    try:
+        result = transpose_matrix(matrix_a)
+        print(f"Transpose of A: {result}")
+    except Exception as e:
+        print(f"Transpose Error: {e}")
     
     print("\n=== End Demo ===")

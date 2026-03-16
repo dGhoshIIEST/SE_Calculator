@@ -64,3 +64,22 @@ def transpose_matrix(a: str) -> str:
         result.append(row)
     
     return _matrix_to_string(result)
+
+def subtract_matrix(a: str, b: str) -> str:
+    """Subtract matrix B from matrix A"""
+    calc = Calculator()
+    matrix_a = _parse_matrix(a)
+    matrix_b = _parse_matrix(b)
+    
+    # Check dimensions
+    if len(matrix_a) != len(matrix_b) or len(matrix_a[0]) != len(matrix_b[0]):
+        raise ValueError("Matrices must have identical dimensions")
+    
+    result = []
+    for i in range(len(matrix_a)):
+        row = []
+        for j in range(len(matrix_a[0])):
+            row.append(calc.subtract(matrix_a[i][j], matrix_b[i][j]))
+        result.append(row)
+    
+    return _matrix_to_string(result)

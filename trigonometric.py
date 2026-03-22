@@ -29,7 +29,9 @@ class Trignometry:
             if x < -1 or x > 1:
                 raise ValueError("asin input must be between -1 and 1")
             return math.degrees(math.asin(x))
-        except Exception:
+        except ValueError as e:
+            if str(e) == "asin input must be between -1 and 1":
+                raise e
             raise ValueError("Invalid input for asin")
 
 
@@ -39,7 +41,9 @@ class Trignometry:
             if x < -1 or x > 1:
                 raise ValueError("acos input must be between -1 and 1")
             return math.degrees(math.acos(x))
-        except Exception:
+        except ValueError as e:
+            if str(e) == "acos input must be between -1 and 1":
+                raise e
             raise ValueError("Invalid input for acos")
 
 

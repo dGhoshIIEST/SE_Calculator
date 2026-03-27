@@ -1,13 +1,13 @@
 
 #Tejash Complement 7s and 8s (7s complement is 7 - digit for each) while 8s comp is 7s comp + 1
 def sevensComplement(octalStr):
-    digits = validate_octal(octalStr)
+    digits = validate_octal(octalStr) #ronak will implement
     comp = ''.join(str(7 - int(d)) for d in digits)
     return f"O'{comp}"
 
 
 def eightsComplement(octalStr):
-    digits = validate_octal(octalStr)
+    digits = validate_octal(octalStr) #ronak will implement
 
     
     comp7 = [7 - int(d) for d in digits]

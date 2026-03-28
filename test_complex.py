@@ -23,11 +23,47 @@ class TestComplexArithmetic(unittest.TestCase):
     # --- Member 2 Tests ---
     def test_add_complex(self):
         # Test normal addition and negative addition
-        pass
+        self.assertEqual(add_complex((3, 2), (5, 3)), (8, 5))
+        self.assertEqual(add_complex((0, 0), (5, 3)), (5, 3))
+        self.assertEqual(add_complex((1, 0), (0, 1)), (1, 1))
+        self.assertEqual(add_complex((2, -3), (-1, 4)), (1, 1))
+
+        # Boundary cases
+        self.assertEqual(add_complex((0, 0), (0, 0)), (0, 0))
+        self.assertEqual(add_complex((999999, 0), (0, 999999)), (999999, 999999))
+        self.assertEqual(add_complex((-1, -1), (-1, -1)), (-2, -2))
+
+        # Invalid input handling
+        with self.assertRaises(TypeError):
+            add_complex((1,), (2, 3))  # Too few elements
+        with self.assertRaises(TypeError):
+            add_complex((1, 2, 3), (2, 3))  # Too many elements
+        with self.assertRaises(TypeError):
+            add_complex((1, 'a'), (2, 3))  # Non-numeric
+        with self.assertRaises(TypeError):
+            add_complex('not a tuple', (2, 3))
 
     def test_subtract_complex(self):
         # Test normal subtraction
-        pass
+        self.assertEqual(subtract_complex((5, 3), (3, 2)), (2, 1))
+        self.assertEqual(subtract_complex((0, 0), (5, 3)), (-5, -3))
+        self.assertEqual(subtract_complex((1, 0), (0, 1)), (1, -1))
+        self.assertEqual(subtract_complex((2, -3), (-1, 4)), (3, -7))
+
+        # Boundary cases
+        self.assertEqual(subtract_complex((0, 0), (0, 0)), (0, 0))
+        self.assertEqual(subtract_complex((999999, 0), (0, 999999)), (999999, -999999))
+        self.assertEqual(subtract_complex((-1, -1), (-1, -1)), (0, 0))
+
+        # Invalid input handling
+        with self.assertRaises(TypeError):
+            subtract_complex((1,), (2, 3))  # Too few elements
+        with self.assertRaises(TypeError):
+            subtract_complex((1, 2, 3), (2, 3))  # Too many elements
+        with self.assertRaises(TypeError):
+            subtract_complex((1, 'a'), (2, 3))  # Non-numeric
+        with self.assertRaises(TypeError):
+            subtract_complex('not a tuple', (2, 3))
 
     # --- Member 3 Tests ---
 

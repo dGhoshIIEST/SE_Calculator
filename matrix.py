@@ -30,12 +30,34 @@ def _matrix_to_string(matrix):
     """Convert matrix list of lists to string format"""
     return str(matrix)
 
+
+
+def multiply_matrix(a: str, b: str) -> str:
+    """Multiply two matrices"""
 def add_matrix(a: str, b: str) -> str:
     """Add two matrices"""
     calc = Calculator()
     matrix_a = _parse_matrix(a)
     matrix_b = _parse_matrix(b)
     
+    # Check dimensions: columns(A) must equal rows(B)
+    cols_a = len(matrix_a[0])
+    rows_b = len(matrix_b)
+    
+    if cols_a != rows_b:
+        raise ValueError("Incompatible matrix dimensions")
+    
+    rows_a = len(matrix_a)
+    cols_b = len(matrix_b[0])
+    
+    result = []
+    for i in range(rows_a):
+        row = []
+        for j in range(cols_b):
+            sum_val = 0
+            for k in range(cols_a):
+                sum_val = calc.add(sum_val, calc.multiply(matrix_a[i][k], matrix_b[k][j]))
+            row.append(sum_val)
     # Check dimensions
     if len(matrix_a) != len(matrix_b) or len(matrix_a[0]) != len(matrix_b[0]):
         raise ValueError("Matrices must have identical dimensions")

@@ -34,6 +34,8 @@ def _matrix_to_string(matrix):
 
 def multiply_matrix(a: str, b: str) -> str:
     """Multiply two matrices"""
+def add_matrix(a: str, b: str) -> str:
+    """Add two matrices"""
     calc = Calculator()
     matrix_a = _parse_matrix(a)
     matrix_b = _parse_matrix(b)
@@ -56,7 +58,50 @@ def multiply_matrix(a: str, b: str) -> str:
             for k in range(cols_a):
                 sum_val = calc.add(sum_val, calc.multiply(matrix_a[i][k], matrix_b[k][j]))
             row.append(sum_val)
+    # Check dimensions
+    if len(matrix_a) != len(matrix_b) or len(matrix_a[0]) != len(matrix_b[0]):
+        raise ValueError("Matrices must have identical dimensions")
+    
+    result = []
+    for i in range(len(matrix_a)):
+        row = []
+        for j in range(len(matrix_a[0])):
+            row.append(calc.add(matrix_a[i][j], matrix_b[i][j]))
         result.append(row)
     
     return _matrix_to_string(result)
 
+def transpose_matrix(a: str) -> str:
+    """Transpose a matrix"""
+    matrix_a = _parse_matrix(a)
+    
+    rows = len(matrix_a)
+    cols = len(matrix_a[0])
+    
+    result = []
+    for j in range(cols):
+        row = []
+        for i in range(rows):
+            row.append(matrix_a[i][j])
+        result.append(row)
+    
+    return _matrix_to_string(result)
+
+def subtract_matrix(a: str, b: str) -> str:
+    """Subtract matrix B from matrix A"""
+    calc = Calculator()
+    matrix_a = _parse_matrix(a)
+    matrix_b = _parse_matrix(b)
+    
+    # Check dimensions
+    if len(matrix_a) != len(matrix_b) or len(matrix_a[0]) != len(matrix_b[0]):
+        raise ValueError("Matrices must have identical dimensions")
+    
+    result = []
+    for i in range(len(matrix_a)):
+        row = []
+        for j in range(len(matrix_a[0])):
+            row.append(calc.subtract(matrix_a[i][j], matrix_b[i][j]))
+        result.append(row)
+    
+    return _matrix_to_string(result)

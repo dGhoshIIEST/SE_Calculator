@@ -72,7 +72,15 @@ class HexCalculator:
         """
         HEX subtraction
         """
-        raise NotImplementedError("subtract not implemented yet")
+        hex_a = self._validate_hex(a)
+        hex_b = self._validate_hex(b)
+
+        result = int(hex_a, 16) - int(hex_b, 16)
+
+        if result < 0:
+            return f"H'-{format(abs(result), 'X')}'"
+
+        return f"H'{format(result, 'X')}'"
 
     # -------------------------------
     # Sneha will edit this part

@@ -45,6 +45,18 @@ class TestHexCalculator(unittest.TestCase):
             "H'A'"
         )
 
+    def test_subtract_with_borrow(self):
+        self.assertEqual(
+            self.hex_calc.subtract("H'10'", "H'1'"),
+            "H'F'"
+        )
+
+    def test_subtract_negative_result(self):
+        self.assertEqual(
+            self.hex_calc.subtract("H'2'", "H'5'"),
+            "H'-3'"
+        )
+
     # ---------------------------------
     # SNEHA 4 TESTS
     # ---------------------------------

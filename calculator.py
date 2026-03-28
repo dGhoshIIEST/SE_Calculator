@@ -1,3 +1,6 @@
+
+from fraction import parse_fraction
+from exceptions import InvalidInputError, InvalidFormatError
 class Calculator:
     def add(self, a, b):
         return a + b
@@ -8,4 +11,52 @@ class Calculator:
     def divide(self, a, b):
         if b == 0:
             raise ValueError("Division by zero")
-        return a / b
+    def calculate(self, expr: str, mode="normal") -> str:
+        if not isinstance(expr, str):
+            raise InvalidInputError()
+
+        expr = expr.strip().replace(" ", "")
+
+        operator = None
+        for op in ['+', '-', '*', '/']:
+            if op in expr:
+                operator = op
+                break
+
+        if operator is None:
+            raise InvalidFormatError()
+
+        parts = expr.split(operator)
+
+        if len(parts) != 2:
+            raise InvalidFormatError()
+
+        left, right = parts
+        if mode == "fraction":
+            f1 = parse_fraction(left)
+            f2 = parse_fraction(right)
+
+            if operator == '+':
+                result = f1.__add__(f2)
+            elif operator == '-':
+                result = f1.__sub__(f2)
+            elif operator == '*':
+                result = f1.__mul__(f2)
+            elif operator == '/':
+                result = f1.__truediv__(f2)
+
+            return str(result)
+
+        # 🔴 OTHER MODES (handled by other teams)
+        elif mode == "arithmetic":
+            raise NotImplementedError("Arithmetic mode not implemented yet")
+
+        elif mode == "complex":
+            raise NotImplementedError("Complex mode not implemented yet")
+
+        else:
+            raise InvalidInputError("Unsupported mode")   
+
+
+
+

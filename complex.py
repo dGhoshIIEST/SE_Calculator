@@ -34,13 +34,44 @@ def add_complex(c1, c2):
     """
     Member 2: Handles the addition of two complex numbers[cite: 120].
     """
-    pass 
+    if not isinstance(c1, tuple) or not isinstance(c2, tuple):
+        raise TypeError("Inputs must be tuples")
+    if len(c1) != 2 or len(c2) != 2:
+        raise TypeError("Tuples must have exactly 2 elements")
+    if not (isinstance(c1[0], (int, float)) and isinstance(c1[1], (int, float)) and 
+            isinstance(c2[0], (int, float)) and isinstance(c2[1], (int, float))):
+        raise TypeError("Tuple elements must be numeric")
+
+    calc = Calculator()
+    a, b = c1
+    c, d = c2
+
+    real_part = calc.add(a, c)
+    imag_part = calc.add(b, d)
+
+    return (real_part, imag_part)
+
 
 def subtract_complex(c1, c2):
     """
     Member 2: Handles the subtraction of c2 from c1[cite: 120].
     """
-    pass
+    if not isinstance(c1, tuple) or not isinstance(c2, tuple):
+        raise TypeError("Inputs must be tuples")
+    if len(c1) != 2 or len(c2) != 2:
+        raise TypeError("Tuples must have exactly 2 elements")
+    if not (isinstance(c1[0], (int, float)) and isinstance(c1[1], (int, float)) and 
+            isinstance(c2[0], (int, float)) and isinstance(c2[1], (int, float))):
+        raise TypeError("Tuple elements must be numeric")
+
+    calc = Calculator()
+    a, b = c1
+    c, d = c2
+
+    real_part = calc.subtract(a, c)
+    imag_part = calc.subtract(b, d)
+
+    return (real_part, imag_part)
 
 def multiply_complex(c1, c2):
     """

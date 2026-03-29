@@ -32,3 +32,14 @@ class IntersectionOperation(SetOperation):
     def execute(self, A, B):
         return A.intersection(B)
 
+
+class SubsetOperation(SetOperation):
+
+    def execute(self, A, B):
+        return A.issubset(B)
+
+
+class SupersetOperation(SetOperation):
+
+    def execute(self, A, B):
+        return A.issuperset(B)

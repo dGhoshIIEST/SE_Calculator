@@ -43,3 +43,13 @@ class SupersetOperation(SetOperation):
 
     def execute(self, A, B):
         return A.issuperset(B)
+    
+class DifferenceOperation(SetOperation):
+
+    def execute(self, A, B):
+        return A.difference(B)
+    
+class SymmetricDifferenceOperation(SetOperation):
+
+    def execute(self, A, B):
+        return A.symmetric_difference(B)

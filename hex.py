@@ -31,15 +31,17 @@ class HexCalculator:
 
     # -------------------------------
     # Sravanti will edit this part
-    # -------------------------------
-    def hex_to_decimal(self, value: str) -> str:
-        """
-        Convert HEX → Decimal
+# -------------------------------
+def hex_to_decimal(self, value: str) -> str:
+    """
+    Convert HEX → Decimal
 
-        Example:
-        H'1A5' → D'421'
-        """
-        raise NotImplementedError("hex_to_decimal not implemented yet")
+    Example:
+    H'1A5' → D'421'
+    """
+    hex_part = value[2:-1]
+    decimal_value = int(hex_part, 16)
+    return f"D'{decimal_value}'"
 
     # -------------------------------
     # Saichaitanya will edit this part

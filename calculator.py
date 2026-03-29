@@ -47,7 +47,6 @@ class Calculator:
 
             return str(result)
 
-        # 🔴 OTHER MODES (handled by other teams)
         elif mode == "arithmetic":
             raise NotImplementedError("Arithmetic mode not implemented yet")
 

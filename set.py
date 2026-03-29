@@ -20,3 +20,15 @@ class SetParser:
         elements = cleaned.split(",")
 
         return {int(e.strip()) for e in elements}
+
+
+class UnionOperation(SetOperation):
+
+    def execute(self, A, B):
+        return A.union(B)
+
+class IntersectionOperation(SetOperation):
+
+    def execute(self, A, B):
+        return A.intersection(B)
+

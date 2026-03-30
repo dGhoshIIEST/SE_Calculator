@@ -45,14 +45,15 @@ class HexCalculator:
     # Saichaitanya will edit this part
     # -------------------------------
     def decimal_to_hex(self, value: str) -> str:
-        """
-        Convert Decimal → HEX
+        value = value.strip()
 
-        Example:
-        D'243' → H'F3'
-        """
-        raise NotImplementedError("decimal_to_hex not implemented yet")
+        if value.startswith("D'") and value.endswith("'"):
+            value = value[2:-1]
 
+        if not value.isdigit():
+            raise ValueError("Invalid decimal input")
+
+        return f"H'{hex(int(value))[2:].upper()}'"
     # -------------------------------
     # Joydip will edit this part
     # -------------------------------

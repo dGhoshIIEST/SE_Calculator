@@ -51,5 +51,16 @@ class TestOctal(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_octal("123")   # wrong format
 
+    def test_validate_octal(self):
+        self.assertEqual(validate_octal("O'123"), "123")
+
+        with self.assertRaises(ValueError):
+            validate_octal("123")   # wrong format
+
+        with self.assertRaises(ValueError):
+            validate_octal("O'89")  # invalid digit
+
+        with self.assertRaises(ValueError):
+            validate_octal("O'")    # empty input
 if __name__ == "__main__":
     unittest.main()

@@ -1,3 +1,4 @@
+
 class HexCalculator:
     """
     Hexadecimal calculator module.
@@ -31,15 +32,17 @@ class HexCalculator:
 
     # -------------------------------
     # Sravanti will edit this part
-    # -------------------------------
-    def hex_to_decimal(self, value: str) -> str:
-        """
-        Convert HEX → Decimal
+# -------------------------------
+def hex_to_decimal(self, value: str) -> str:
+    """
+    Convert HEX → Decimal
 
-        Example:
-        H'1A5' → D'421'
-        """
-        raise NotImplementedError("hex_to_decimal not implemented yet")
+    Example:
+    H'1A5' → D'421'
+    """
+    hex_part = value[2:-1]
+    decimal_value = int(hex_part, 16)
+    return f"D'{decimal_value}'"
 
     # -------------------------------
     # Saichaitanya will edit this part
@@ -108,6 +111,9 @@ class HexCalculator:
         """
         Compute 16's complement
         """
+
+        raise NotImplementedError("16's complement not implemented yet")
+
         hex_part = self._validate_hex(value)
 
         # Step 1: 15's complement

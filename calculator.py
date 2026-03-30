@@ -2,6 +2,9 @@
 from fraction import parse_fraction
 from exceptions import InvalidInputError, InvalidFormatError
 class Calculator:
+    # mode can be 1: Fraction, 2: Bin, 3: Oct, 4: Hex, 5: Set, 6: Matrix, default  = 0
+    mode = 0
+    
     def add(self, a, b):
         return a + b
     def subtract(self, a, b):
@@ -11,54 +14,8 @@ class Calculator:
     def divide(self, a, b):
         if b == 0:
             raise ValueError("Division by zero")
-        return a/b
+        return a / b
 
-
-    """def calculate(self, expr: str, mode="normal") -> str:
-        if not isinstance(expr, str):
-            raise InvalidInputError()
-
-        expr = expr.strip().replace(" ", "")
-
-        operator = None
-        for op in ['+', '-', '*', '/']:
-            if op in expr:
-                operator = op
-                break
-
-        if operator is None:
-            raise InvalidFormatError()
-
-        parts = expr.split(operator)
-
-        if len(parts) != 2:
-            raise InvalidFormatError()
-
-        left, right = parts
-        if mode == "fraction":
-            f1 = parse_fraction(left)
-            f2 = parse_fraction(right)
-
-            if operator == '+':
-                result = f1.__add__(f2)
-            elif operator == '-':
-                result = f1.__sub__(f2)
-            elif operator == '*':
-                result = f1.__mul__(f2)
-            elif operator == '/':
-                result = f1.__truediv__(f2)
-
-            return str(result)
-
-        elif mode == "arithmetic":
-            raise NotImplementedError("Arithmetic mode not implemented yet")
-
-        elif mode == "complex":
-            raise NotImplementedError("Complex mode not implemented yet")
-
-        else:
-            raise InvalidInputError("Unsupported mode")"""
-
-
-
-
+    def evaluate(mode = 0):
+        #check the mode and based on its values execute for different modes
+        print('evaluate method to extend for multiple derived classes')

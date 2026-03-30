@@ -1,6 +1,5 @@
 import ast
 
-#Adhithya code committed 
 class SetOperations:
     def parse_set(self, value):
         if isinstance(value, set):
@@ -67,3 +66,4 @@ class SetOperations:
                 return function(left, right)
 
         raise ValueError("Invalid set expression")
+         #the code is checked

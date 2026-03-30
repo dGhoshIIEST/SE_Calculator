@@ -1,5 +1,7 @@
 #Prashant Dubey
 #Aritmetic operations in Octal Base
+from validate_octal import *
+
 def add_octal(a, b):
     d1 = int(validate_octal(a), 8)
     d2 = int(validate_octal(b), 8)

@@ -1,7 +1,7 @@
 import unittest
 from fraction import parse_fraction, Fraction
 from exceptions import InvalidInputError, InvalidFormatError, InvalidFractionError
-from test_calculator import TestCalculator
+
 
 class TestFractionParsing(unittest.TestCase):
     def test_invalid_type(self):

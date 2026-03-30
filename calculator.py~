@@ -14,7 +14,7 @@ class Calculator:
         return a/b
 
 
-    """def calculate(self, expr: str, mode="normal") -> str:
+    def calculate(self, expr: str, mode="normal") -> str:
         if not isinstance(expr, str):
             raise InvalidInputError()
 
@@ -57,7 +57,7 @@ class Calculator:
             raise NotImplementedError("Complex mode not implemented yet")
 
         else:
-            raise InvalidInputError("Unsupported mode")"""
+            raise InvalidInputError("Unsupported mode") 
 
 
 

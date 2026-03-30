@@ -1,0 +1,1 @@
+A simple and efficient Scientific/Software Engineering Calculator built to perform a variety of mathematical and logical operations. This project is designed to demonstrate core programming concepts, modular design, and user interaction.

@@ -85,11 +85,6 @@ class HexCalculator:
     # -------------------------------
     # Sneha will edit this part
     # -------------------------------
-    class HexCalculator:
-
-    # -------------------------------
-    # Sneha will edit this part
-    # -------------------------------
     def fifteen_complement(self, value: str) -> str:
         """
         Compute 15's complement

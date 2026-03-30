@@ -63,7 +63,12 @@ class HexCalculator:
         Example:
         H'A' + H'5' → H'F'
         """
-        raise NotImplementedError("add not implemented yet")
+        x = int(self._validate_hex(a),16)
+        y = int(self._validate_hex(b),16)
+        
+        result = x + y
+        
+        return f"H'{format(result,'X')}"
     # -------------------------------
     # Pratyush will edit this part
     # -------------------------------

@@ -1,3 +1,4 @@
+
 class HexCalculator:
     """
     Hexadecimal calculator module.

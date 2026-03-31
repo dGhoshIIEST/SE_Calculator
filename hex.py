@@ -12,8 +12,8 @@ class HexCalculator:
 
     def _validate_hex(self, value: str) -> str:
         """
-        Validate input format H'AB12'
-        Returns the internal hex string.
+        Validate input format H'AB12' or H'-F3'.
+        Returns the internal canonical hex string (sign + digits).
         """
         if not isinstance(value, str):
             raise ValueError("Input must be a string")
@@ -21,14 +21,26 @@ class HexCalculator:
         if not value.startswith("H'") or not value.endswith("'"):
             raise ValueError("Invalid HEX format. Expected H'AB12'")
 
-        hex_part = value[2:-1]
+        inner = value[2:-1]
 
-        try:
-            int(hex_part, 16)
-        except ValueError:
+        if inner == "":
+            raise ValueError("Invalid HEX format. Empty value")
+
+        sign = ""
+        if inner[0] in "+-":
+            sign = inner[0]
+            inner = inner[1:]
+
+        if inner == "":
+            raise ValueError("Invalid HEX format. Missing digits")
+
+        valid_chars = set("0123456789ABCDEFabcdef")
+        if not all(ch in valid_chars for ch in inner):
             raise ValueError("Invalid hexadecimal digits")
 
-        return hex_part
+        # Normalize to uppercase and keep sign
+        normalized = sign + inner.upper()
+        return normalized
 
     # -------------------------------
     # Sravanti will edit this part
@@ -66,13 +78,15 @@ def hex_to_decimal(self, value: str) -> str:
 
         Example:
         H'A' + H'5' → H'F'
-        """
-        x = int(self._validate_hex(a),16)
-        y = int(self._validate_hex(b),16)
-        
+        """    
+        x = int(self._validate_hex(a), 16)
+        y = int(self._validate_hex(b), 16)
+
         result = x + y
-        
-        return f"H'{format(result,'X')}"
+
+        if result < 0:
+            return f"H'-{format(-result, 'X')}'"
+        return f"H'{format(result, 'X')}'"
     # -------------------------------
     # Pratyush will edit this part
     # -------------------------------

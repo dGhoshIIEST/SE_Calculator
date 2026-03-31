@@ -32,10 +32,17 @@ class TestHexCalculator(unittest.TestCase):
     # JOYDIP 3 TESTS
     # ---------------------------------
     def test_add(self):
-        self.assertEqual(
-            self.hex_calc.add("H'A'", "H'5'"),
-            "H'F'"
-        )
+        self.assertEqual(self.hex_calc.add("H'A'", "H'5'"), "H'F'")
+        self.assertEqual(self.hex_calc.add("H'7'", "H'9'"), "H'10'")
+        self.assertEqual(self.hex_calc.add("H'FF'", "H'1'"), "H'100'")
+        self.assertEqual(self.hex_calc.add("H'1A'", "H'2'"), "H'1C'")
+        self.assertEqual(self.hex_calc.add("H'0'", "H'AB'"), "H'AB'")
+        self.assertEqual(self.hex_calc.add("H'5'", "H'-3'"), "H'2'")
+        self.assertEqual(self.hex_calc.add("H'00A'", "H'005'"), "H'F'")
+        self.assertEqual(self.hex_calc.add("H'ABC'", "H'123'"), "H'BDF'")
+        self.assertEqual(self.hex_calc.add("H'1'", "H'-2'"), "H'-1'")
+        with self.assertRaises(ValueError):
+            self.hex_calc.add("H'G1'", "H'2'")
     # ---------------------------------
     # PRATYUSH 3 TESTS
     # ---------------------------------

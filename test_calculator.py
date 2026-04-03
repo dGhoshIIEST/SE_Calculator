@@ -15,13 +15,13 @@ class TestCalculator(unittest.TestCase):
     def test_multiply(self):
         self.assertEqual(self.calc.multiply(2, 3), 6)
 
-    def test_divide(self):
+    def test_divide_positive(self):
         self.assertEqual(self.calc.divide(2, 4), 0.5)
 
-    def test_divide(self):
+    def test_divide_negative(self):
         self.assertEqual(self.calc.divide(4, -2), -2)
-    
-    def test_divide_fail(self): # this will fail
+
+    def test_divide_fail(self):
         self.assertNotEqual(self.calc.divide(4, -2), 2)
 
     def test_divide_by_zero(self):

@@ -20,4 +20,4 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi # Installs any dependencies you have
       - name: Test with unittest
-        run: python -m unittest discover # Runs the unittest discover command
+        run: PYTHONPATH=. python -m unittest discover # Runs the unittest discover command

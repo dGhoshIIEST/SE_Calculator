@@ -16,4 +16,3 @@ class Calculator:
     def evaluate(mode = 0):
         #check the mode and based on its values execute for different mode
         print('evaluate method to extend for multiple derived classes')
-

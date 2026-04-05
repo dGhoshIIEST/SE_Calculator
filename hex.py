@@ -12,8 +12,8 @@ class HexCalculator:
 
     def _validate_hex(self, value: str) -> str:
         """
-        Validate input format H'AB12'
-        Returns the internal hex string.
+        Validate input format H'AB12' or H'-F3'.
+        Returns the internal canonical hex string (sign + digits).
         """
         if not isinstance(value, str):
             raise ValueError("Input must be a string")
@@ -21,14 +21,26 @@ class HexCalculator:
         if not value.startswith("H'") or not value.endswith("'"):
             raise ValueError("Invalid HEX format. Expected H'AB12'")
 
-        hex_part = value[2:-1]
+        inner = value[2:-1]
 
-        try:
-            int(hex_part, 16)
-        except ValueError:
+        if inner == "":
+            raise ValueError("Invalid HEX format. Empty value")
+
+        sign = ""
+        if inner[0] in "+-":
+            sign = inner[0]
+            inner = inner[1:]
+
+        if inner == "":
+            raise ValueError("Invalid HEX format. Missing digits")
+
+        valid_chars = set("0123456789ABCDEFabcdef")
+        if not all(ch in valid_chars for ch in inner):
             raise ValueError("Invalid hexadecimal digits")
 
-        return hex_part
+        # Normalize to uppercase and keep sign
+        normalized = sign + inner.upper()
+        return normalized
 
     # -------------------------------
     # Sravanti will edit this part
@@ -40,6 +52,7 @@ class HexCalculator:
         Example:
         H'1A5' → D'421'
         """
+<<<<<<< HEAD
         try:
             # Remove H' and '
             hex_value = value[2:-1]
@@ -52,19 +65,25 @@ class HexCalculator:
 
         except:
             return "Invalid input"
+=======
+        hex_part = value[2:-1]
+        decimal_value = int(hex_part, 16)
+        return f"D'{decimal_value}'"
+>>>>>>> FeatureB_8_Sravanthi
 
     # -------------------------------
     # Saichaitanya will edit this part
     # -------------------------------
     def decimal_to_hex(self, value: str) -> str:
-        """
-        Convert Decimal → HEX
+        value = value.strip()
 
-        Example:
-        D'243' → H'F3'
-        """
-        raise NotImplementedError("decimal_to_hex not implemented yet")
+        if value.startswith("D'") and value.endswith("'"):
+            value = value[2:-1]
 
+        if not value.isdigit():
+            raise ValueError("Invalid decimal input")
+
+        return f"H'{hex(int(value))[2:].upper()}'"
     # -------------------------------
     # Joydip will edit this part
     # -------------------------------
@@ -74,9 +93,51 @@ class HexCalculator:
 
         Example:
         H'A' + H'5' → H'F'
+<<<<<<< HEAD
         """
         raise NotImplementedError("add not implemented yet")
 
+=======
+        """    
+        x = int(self._validate_hex(a), 16)
+        y = int(self._validate_hex(b), 16)
+
+        result = x + y
+
+        if result < 0:
+            return f"H'-{format(-result, 'X')}'"
+        return f"H'{format(result, 'X')}'"
+    
+    def multiply(self, a: str, b: str) -> str:
+        """
+        HEX multiplication
+        """
+        x = int(self._validate_hex(a), 16)
+        y = int(self._validate_hex(b), 16)
+
+        result = x * y
+
+        if result < 0:
+            return f"H'-{format(-result, 'X')}'"
+        return f"H'{format(result, 'X')}'"
+    
+    def divide(self, a: str, b: str) -> str:
+        """
+        HEX division -- returns quotient only (integer division)
+        """
+        x = int(self._validate_hex(a), 16)
+        y = int(self._validate_hex(b), 16)
+
+        if y == 0:
+            raise ValueError("Division by zero")
+
+        result = x // y
+
+        if result < 0:
+            return f"H'-{format(-result, 'X')}'"
+        return f"H'{format(result, 'X')}'"
+    
+>>>>>>> FeatureB_8_Sravanthi
     # -------------------------------
     # Pratyush will edit this part
     # -------------------------------
@@ -114,6 +175,10 @@ class HexCalculator:
         """
         Compute 16's complement
         """
+<<<<<<< HEAD
+=======
+
+>>>>>>> FeatureB_8_Sravanthi
         hex_part = self._validate_hex(value)
 
         # Step 1: 15's complement

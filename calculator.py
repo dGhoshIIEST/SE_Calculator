@@ -1,3 +1,5 @@
+from expression_parser import evaluate_expression
+
 class Calculator:
     # mode can be 1: Fraction, 2: Bin, 3: Oct, 4: Hex, 5: Set, 6: Matrix, default  = 0
     mode = 0
@@ -12,7 +14,8 @@ class Calculator:
         if b == 0:
             raise ValueError("Division by zero")
         return a / b
-
-    def evaluate(mode = 0):
-        #check the mode and based on its values execute for different modes
-        print('evaluate method to extend for multiple derived classes')
+    def evaluate(self, expr):
+        try:
+            return evaluate_expression(expr)
+        except Exception as e:
+            raise ValueError(f"Invalid expression: {str(e)}")

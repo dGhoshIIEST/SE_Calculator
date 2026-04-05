@@ -1,33 +1,51 @@
 import unittest
 from calculator import Calculator
 
-class TestCalculator(unittest.TestCase):
-    # base test cases
+class TestArithmetic(unittest.TestCase):
+
     def setUp(self):
         self.calc = Calculator()
 
     def test_add(self):
-        self.assertEqual(self.calc.add(2, 3), 5)
+        self.assertEqual(self.calc.evaluate("2+3"), 5)
 
-    def test_sub(self):
-        self.assertEqual(self.calc.subtract(2, 3), -1)
+    def test_precedence(self):
+        self.assertEqual(self.calc.evaluate("2+3*4"), 14)
 
-    def test_multiply(self):
-        self.assertEqual(self.calc.multiply(2, 3), 6)
+    def test_parentheses(self):
+        self.assertEqual(self.calc.evaluate("(2+3)*4"), 20)
 
-    def test_divide(self):
-        self.assertEqual(self.calc.divide(2, 4), 0.5)
+    def test_power(self):
+        self.assertEqual(self.calc.evaluate("3**2"), 9)
 
-    def test_divide(self):
-        self.assertEqual(self.calc.divide(4, -2), -2)
-    
-    def test_divide_fail(self): # this will fail
-        self.assertNotEqual(self.calc.divide(4, -2), 2)
+    def test_modulo(self):
+        self.assertEqual(self.calc.evaluate("10%3"), 1)
 
-    def test_divide_by_zero(self):
+    def test_sqrt(self):
+        self.assertEqual(self.calc.evaluate("sqrt(16)"), 4)
+
+    def test_cbrt(self):
+        self.assertAlmostEqual(self.calc.evaluate("cbrt(27)"), 3)
+
+    def test_factorial(self):
+        self.assertEqual(self.calc.evaluate("5!"), 120)
+
+    def test_log(self):
+        self.assertAlmostEqual(self.calc.evaluate("log(100)"), 2)
+
+    def test_floor(self):
+        self.assertEqual(self.calc.evaluate("floor(2.7)"), 2)
+
+    def test_ceil(self):
+        self.assertEqual(self.calc.evaluate("ceil(2.2)"), 3)
+
+    def test_nested(self):
+        self.assertEqual(self.calc.evaluate("2*(3+4)"), 14)
+
+    def test_div_zero(self):
         with self.assertRaises(ValueError):
-            self.calc.divide(5, 0)
+            self.calc.evaluate("5/0")
 
-# Optional: this allows running the script directly
-    if __name__ == '__main__':
-        unittest.main() #
+
+if __name__ == "__main__":
+    unittest.main()

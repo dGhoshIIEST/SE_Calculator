@@ -7,27 +7,114 @@ class TestHexCalculator(unittest.TestCase):
     def setUp(self):
         self.hex_calc = HexCalculator()
 
-    # ---------------------------------
-    # SRAVANTI TEST
-    # ---------------------------------
     def test_hex_to_decimal(self):
-        self.assertEqual(
-            self.hex_calc.hex_to_decimal("H'1A5'"),
-            "D'421'"
-        )
+        # ----- NORMAL CASES -----
+        # Case 1: Basic conversion
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'1A5'"), "D'421'")
+        
+        # Case 2: Single digit hex to decimal
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'A'"), "D'10'")
+        
+        # Case 3: Two digit hex conversion
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'FF'"), "D'255'")
+        
+        # Case 4: Larger hex number
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'100'"), "D'256'")
+        
+        # Case 5: Multi-digit hex conversion
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'BEEF'"), "D'48879'")
+        
+        # ----- BOUNDARY CONDITIONS -----
+        # Boundary 1: Hex zero
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'0'"), "D'0'")
+        
+        # Boundary 2: Hex one
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'1'"), "D'1'")
+        
+        # Boundary 3: Hex with leading zeros
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'00FF'"), "D'255'")
+        
+        # Boundary 4: Large hex number (max 16-bit)
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'FFFF'"), "D'65535'")
+        
+        # Boundary 5: Hex with negative number
+        self.assertEqual(self.hex_calc.hex_to_decimal("H'-A'"), "D'-10'")
+        
+        # ----- INVALID INPUT HANDLING -----
+        # Invalid Case 1: Invalid format - missing prefix
+        with self.assertRaises(ValueError):
+            self.hex_calc.hex_to_decimal("1A5")
+        
+        # Invalid Case 2: Invalid format - wrong prefix
+        with self.assertRaises(ValueError):
+            self.hex_calc.hex_to_decimal("D'1A5'")
+        
+        # Invalid Case 3: Invalid format with incorrect brackets
+        with self.assertRaises(ValueError):
+            self.hex_calc.hex_to_decimal("H[1A5]")
+        
+        # Invalid Case 4: Invalid hex digit (G is not valid)
+        with self.assertRaises(ValueError):
+            self.hex_calc.hex_to_decimal("H'G5'")
+        
+        # Invalid Case 5: Non-string input (integer)
+        with self.assertRaises((ValueError, TypeError)):
+            self.hex_calc.hex_to_decimal(421)
 
-    # ---------------------------------
-    # SAICHAITANYA TEST
-    # ---------------------------------
     def test_decimal_to_hex(self):
-        self.assertEqual(
-            self.hex_calc.decimal_to_hex("D'243'"),
-            "H'F3'"
-        )
-
-    # ---------------------------------
-    # JOYDIP TEST
-    # ---------------------------------
+        # ----- NORMAL CASES -----
+        # Case 1: Basic conversion
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'243'"), "H'F3'")
+        
+        # Case 2: Single digit decimal to hex
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'10'"), "H'A'")
+        
+        # Case 3: Two digit decimal conversion
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'255'"), "H'FF'")
+        
+        # Case 4: Larger decimal number
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'256'"), "H'100'")
+        
+        # Case 5: Multi-digit decimal conversion
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'48879'"), "H'BEEF'")
+        
+        # ----- BOUNDARY CONDITIONS -----
+        # Boundary 1: Decimal zero
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'0'"), "H'0'")
+        
+        # Boundary 2: Decimal one
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'1'"), "H'1'")
+        
+        # Boundary 3: Decimal with leading zeros
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'00255'"), "H'FF'")
+        
+        # Boundary 4: Large decimal number
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'65535'"), "H'FFFF'")
+        
+        # Boundary 5: Decimal with negative number
+        self.assertEqual(self.hex_calc.decimal_to_hex("D'-10'"), "H'-A'")
+        
+        # ----- INVALID INPUT HANDLING -----
+        # Invalid Case 1: Invalid format - missing prefix
+        with self.assertRaises(ValueError):
+            self.hex_calc.decimal_to_hex("243")
+        
+        # Invalid Case 2: Invalid format - wrong prefix
+        with self.assertRaises(ValueError):
+            self.hex_calc.decimal_to_hex("H'243'")
+        
+        # Invalid Case 3: Invalid format with incorrect brackets
+        with self.assertRaises(ValueError):
+            self.hex_calc.decimal_to_hex("D[243]")
+        
+        # Invalid Case 4: Non-string input (integer)
+        with self.assertRaises((ValueError, TypeError)):
+            self.hex_calc.decimal_to_hex(243)
+        
+        # Invalid Case 5: None input
+        with self.assertRaises((ValueError, TypeError)):
+            self.hex_calc.decimal_to_hex(None)
+            
     def test_add(self):
         self.assertEqual(
             self.hex_calc.add("H'A'", "H'5'"),
@@ -196,9 +283,6 @@ class TestHexCalculator(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.hex_calc.divide("H'A'", "B5")
 
-    # ---------------------------------
-    # PRATYUSH TEST
-    # ---------------------------------
     def test_subtract_all_cases(self):
         # Basic subtract scenarios
         self.assertEqual(self.hex_calc.subtract("H'F'", "H'5'"), "H'A'")
@@ -228,9 +312,6 @@ class TestHexCalculator(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.hex_calc.subtract("H'1'", None)
 
-    # ---------------------------------
-    # SNEHA TESTS
-    # ---------------------------------
     def test_fifteen_complement(self):
         # ----- NORMAL CASES -----
         # Case 1: Basic single-digit complement

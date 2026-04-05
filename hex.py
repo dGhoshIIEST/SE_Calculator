@@ -40,46 +40,61 @@ class HexCalculator:
 
         return sign + inner.upper()
 
-    # -------------------------------
-    # Sravanti implementation
-    # -------------------------------
     def hex_to_decimal(self, value: str) -> str:
         """
         Convert HEX → Decimal
 
-        Example:
-        H'1A5' → D'421'
-        """
-        try:
-            hex_value = self._validate_hex(value)
-            decimal_value = int(hex_value, 16)
-            return f"D'{decimal_value}'"
-        except Exception:
-            return "Invalid input"
+        Valid input format:
+        H'1A5'
+        H'-F'
+        H'00A'
+        H'0'
 
-    # -------------------------------
-    # Saichaitanya implementation
-    # -------------------------------
+        Returns:
+        D'421'
+        D'-15'
+        D'10'
+        D'0'
+        """
+        hex_value = self._validate_hex(value)
+        decimal_value = int(hex_value, 16)
+        return f"D'{decimal_value}'"
+
     def decimal_to_hex(self, value: str) -> str:
         """
         Convert Decimal → HEX
+        Valid input format:
+        D'421'
+        D'-15'  
 
-        Example:
-        D'243' → H'F3'
+        Returns:
+        H'1A5'
+        H'-F'
         """
-        value = value.strip()
-
-        if value.startswith("D'") and value.endswith("'"):
-            value = value[2:-1]
-
-        if not value.isdigit():
+        if not isinstance(value, str):
             raise ValueError("Invalid decimal input")
 
-        return f"H'{hex(int(value))[2:].upper()}'"
+        value = value.strip()
 
-    # -------------------------------
-    # Joydip implementation
-    # -------------------------------
+        # Must strictly follow D'...'
+        if not value.startswith("D'") or not value.endswith("'"):
+            raise ValueError("Invalid decimal input")
+
+        inner = value[2:-1].strip()
+
+        if inner == "":
+            raise ValueError("Invalid decimal input")
+
+        if not inner.lstrip("+-").isdigit():
+            raise ValueError("Invalid decimal input")
+
+        number = int(inner)
+
+        if number < 0:
+            return f"H'-{format(abs(number), 'X')}'"
+        
+        return f"H'{format(number, 'X')}'"
+    
     def add(self, a: str, b: str) -> str:
         """
         HEX addition
@@ -125,9 +140,7 @@ class HexCalculator:
             return f"H'-{format(-result, 'X')}'"
         return f"H'{format(result, 'X')}'"
 
-    # -------------------------------
-    # Pratyush implementation
-    # -------------------------------
+
     def subtract(self, a: str, b: str) -> str:
         """
         HEX subtraction
@@ -141,9 +154,6 @@ class HexCalculator:
             return f"H'-{format(-result, 'X')}'"
         return f"H'{format(result, 'X')}'"
 
-    # -------------------------------
-    # Sneha implementation
-    # -------------------------------
     def fifteen_complement(self, value: str) -> str:
         hex_part = self._validate_hex(value)
 

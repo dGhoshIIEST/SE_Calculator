@@ -157,8 +157,6 @@ class HexCalculator:
         Compute 16's complement
         """
 
-        raise NotImplementedError("16's complement not implemented yet")
-
         hex_part = self._validate_hex(value)
 
         # Step 1: 15's complement

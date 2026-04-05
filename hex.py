@@ -87,6 +87,36 @@ class HexCalculator:
         if result < 0:
             return f"H'-{format(-result, 'X')}'"
         return f"H'{format(result, 'X')}'"
+    
+    def multiply(self, a: str, b: str) -> str:
+        """
+        HEX multiplication
+        """
+        x = int(self._validate_hex(a), 16)
+        y = int(self._validate_hex(b), 16)
+
+        result = x * y
+
+        if result < 0:
+            return f"H'-{format(-result, 'X')}'"
+        return f"H'{format(result, 'X')}'"
+    
+    def divide(self, a: str, b: str) -> str:
+        """
+        HEX division -- returns quotient only (integer division)
+        """
+        x = int(self._validate_hex(a), 16)
+        y = int(self._validate_hex(b), 16)
+
+        if y == 0:
+            raise ValueError("Division by zero")
+
+        result = x // y
+
+        if result < 0:
+            return f"H'-{format(-result, 'X')}'"
+        return f"H'{format(result, 'X')}'"
+    
     # -------------------------------
     # Pratyush will edit this part
     # -------------------------------

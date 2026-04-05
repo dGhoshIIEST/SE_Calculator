@@ -86,6 +86,113 @@ class TestHexCalculator(unittest.TestCase):
         # Invalid Case 5: Invalid format with incorrect brackets
         with self.assertRaises(ValueError):
             self.hex_calc.add("H[A5]", "H'B'")
+            
+    def test_multiply(self):
+        # ----- NORMAL CASES -----
+        # Case 1: Basic single-digit multiplication without carry
+        self.assertEqual(self.hex_calc.multiply("H'3'", "H'4'"), "H'C'")
+        
+        # Case 2: Multi-digit multiplication without carry
+        self.assertEqual(self.hex_calc.multiply("H'2'", "H'10'"), "H'20'")
+        
+        # Case 3: Multi-digit multiplication with carry propagation
+        self.assertEqual(self.hex_calc.multiply("H'1A'", "H'2'"), "H'34'")
+        
+        # Case 4: Simple two-digit hex multiplication
+        self.assertEqual(self.hex_calc.multiply("H'5'", "H'6'"), "H'1E'")
+        
+        # Case 5: Multiplication of larger numbers
+        self.assertEqual(self.hex_calc.multiply("H'AB'", "H'CD'"), "H'88EF'")
+        
+        # ----- BOUNDARY CONDITIONS -----
+        # Boundary 1: Multiplication with zero (annihilator element)
+        self.assertEqual(self.hex_calc.multiply("H'A'", "H'0'"), "H'0'")
+        
+        # Boundary 2: Multiplication with one (identity element)
+        self.assertEqual(self.hex_calc.multiply("H'A'", "H'1'"), "H'A'")
+        
+        # Boundary 3: Multiplication resulting in zero
+        self.assertEqual(self.hex_calc.multiply("H'A'", "H'-0'"), "H'0'")
+        
+        # Boundary 4: Multiplication with negative numbers (negative result)
+        self.assertEqual(self.hex_calc.multiply("H'-3'", "H'4'"), "H'-C'")
+        
+        # Boundary 5: Multiplication resulting in negative number
+        self.assertEqual(self.hex_calc.multiply("H'-2'", "H'-3'"), "H'6'")
+        
+        # ----- INVALID INPUT HANDLING -----
+        # Invalid Case 1: Invalid hex digit (G is not valid in hexadecimal)
+        with self.assertRaises(ValueError):
+            self.hex_calc.multiply("H'G1'", "H'2'")
+        
+        # Invalid Case 2: Invalid hex digit in second operand (Z is not valid)
+        with self.assertRaises(ValueError):
+            self.hex_calc.multiply("H'A'", "H'Z5'")
+        
+        # Invalid Case 3: Missing hex format prefix in first operand
+        with self.assertRaises(ValueError):
+            self.hex_calc.multiply("A5", "H'B'")
+        
+        # Invalid Case 4: Missing hex format prefix in second operand
+        with self.assertRaises(ValueError):
+            self.hex_calc.multiply("H'A'", "B5")
+        
+        # Invalid Case 5: Invalid format with incorrect brackets
+        with self.assertRaises(ValueError):
+            self.hex_calc.multiply("H[A5]", "H'B'")
+            
+    def test_divide(self):
+        
+        # ----- NORMAL CASES -----
+        # Case 1: Basic single-digit division without remainder
+        self.assertEqual(self.hex_calc.divide("H'C'", "H'4'"), "H'3'")
+        
+        # Case 2: Multi-digit division without remainder
+        self.assertEqual(self.hex_calc.divide("H'20'", "H'2'"), "H'10'")
+        
+        # Case 3: Multi-digit division with remainder (integer division)
+        self.assertEqual(self.hex_calc.divide("H'1A'", "H'3'"), "H'8'")
+        
+        # Case 4: Simple two-digit hex division
+        self.assertEqual(self.hex_calc.divide("H'1E'", "H'6'"), "H'5'")
+        
+        # Case 5: Division of larger numbers
+        self.assertEqual(self.hex_calc.divide("H'88EF'", "H'AB'"), "H'CD'")
+        
+        # ----- BOUNDARY CONDITIONS -----
+        # Boundary 1: Division by one (identity element)
+        self.assertEqual(self.hex_calc.divide("H'A'", "H'1'"), "H'A'")
+        
+        # Boundary 2: Division resulting in zero
+        self.assertEqual(self.hex_calc.divide("H'1'", "H'2'"), "H'0'")
+        
+        # Boundary 3: Division with negative numbers (negative result)
+        self.assertEqual(self.hex_calc.divide("H'-C'", "H'4'"), "H'-3'")
+        
+        # Boundary 4: Division resulting in negative number
+        self.assertEqual(self.hex_calc.divide("H'-6'", "H'-2'"), "H'3'")
+        
+        # ----- INVALID INPUT HANDLING -----
+        # Invalid Case 1: Division by zero
+        with self.assertRaises(ValueError):
+            self.hex_calc.divide("H'A'", "H'0'")
+            
+        # Invalid Case 2: Invalid hex digit (G is not valid in hexadecimal)
+        with self.assertRaises(ValueError):
+            self.hex_calc.divide("H'G1'", "H'2'")
+            
+        # Invalid Case 3: Invalid hex digit in second operand (Z is not valid)
+        with self.assertRaises(ValueError):
+            self.hex_calc.divide("H'A'", "H'Z5'")
+            
+        # Invalid Case 4: Missing hex format prefix in first operand
+        with self.assertRaises(ValueError):
+            self.hex_calc.divide("A5", "H'B'")
+        
+        # Invalid Case 5: Missing hex format prefix in second operand
+        with self.assertRaises(ValueError):
+            self.hex_calc.divide("H'A'", "B5")
+
     # ---------------------------------
     # PRATYUSH 3 TESTS
     # ---------------------------------

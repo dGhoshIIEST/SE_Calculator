@@ -8,8 +8,7 @@ class TestCalculator(unittest.TestCase):
         self.calc = Calculator()
 
     # ---------------------------------
-    # PREVIOUS BASIC DECIMAL TESTS
-    # (kept as-is for backward compatibility)
+    # BASIC DECIMAL TESTS AS PER ORIGINAL CALCULATOR
     # ---------------------------------
     def test_add_decimal(self):
         self.assertEqual(self.calc.add(2, 3), 5)

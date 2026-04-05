@@ -75,17 +75,9 @@ class HexCalculator:
         raise NotImplementedError("subtract not implemented yet")
 
     # -------------------------------
-    # Sneha will edit this part
-    # -------------------------------
-    class HexCalculator:
-
-    # -------------------------------
-    # Sneha will edit this part
+    # SNEHA PART (ONLY THIS YOU ADD)
     # -------------------------------
     def fifteen_complement(self, value: str) -> str:
-        """
-        Compute 15's complement
-        """
         hex_part = self._validate_hex(value)
 
         result = ""
@@ -95,23 +87,21 @@ class HexCalculator:
 
         return f"H'{result}'"
 
-
     def sixteen_complement(self, value: str) -> str:
-        """
-        Compute 16's complement
-        """
         hex_part = self._validate_hex(value)
 
-        # Step 1: 15's complement
+        # 15's complement
         comp15 = ""
         for digit in hex_part:
             comp = 15 - int(digit, 16)
             comp15 += format(comp, 'X')
 
-        # Step 2: add 1
+        # add 1
         comp16 = hex(int(comp15, 16) + 1)[2:].upper()
 
-        # Step 3: maintain same length
+        # maintain length
         comp16 = comp16.zfill(len(hex_part))
 
         return f"H'{comp16}'"
+
+    

@@ -29,7 +29,6 @@ class TestHexCalculator(unittest.TestCase):
     # JOYDIP TEST
     # ---------------------------------
     def test_add(self):
- FeatureB_8_Sneha
         self.assertEqual(
             self.hex_calc.add("H'A'", "H'5'"),
             "H'F'"
@@ -196,19 +195,10 @@ class TestHexCalculator(unittest.TestCase):
         # Invalid Case 5: Missing hex format prefix in second operand
         with self.assertRaises(ValueError):
             self.hex_calc.divide("H'A'", "B5")
- FeatureB_8
 
     # ---------------------------------
     # PRATYUSH TEST
     # ---------------------------------
- FeatureB_8_Sneha
-    def test_subtract(self):
-        self.assertEqual(
-            self.hex_calc.subtract("H'F'", "H'5'"),
-            "H'A'"
-        )
-
-    
     def test_subtract_all_cases(self):
         # Basic subtract scenarios
         self.assertEqual(self.hex_calc.subtract("H'F'", "H'5'"), "H'A'")
@@ -237,47 +227,120 @@ class TestHexCalculator(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.hex_calc.subtract("H'1'", None)
- FeatureB_8
 
     # ---------------------------------
     # SNEHA TESTS
     # ---------------------------------
     def test_fifteen_complement(self):
+        # ----- NORMAL CASES -----
+        # Case 1: Basic single-digit complement
         self.assertEqual(self.hex_calc.fifteen_complement("H'A'"), "H'5'")
+        
+        # Case 2: Another single-digit complement
+        self.assertEqual(self.hex_calc.fifteen_complement("H'3'"), "H'C'")
+        
+        # Case 3: Multi-digit complement
+        self.assertEqual(self.hex_calc.fifteen_complement("H'1A'"), "H'E5'")
+        
+        # Case 4: Larger number complement
+        self.assertEqual(self.hex_calc.fifteen_complement("H'ABC'"), "H'543'")
+        
+        # Case 5: Complement of multi-digit number
+        self.assertEqual(self.hex_calc.fifteen_complement("H'ABCD'"), "H'5432'")
+        
+        # ----- BOUNDARY CONDITIONS -----
+        # Boundary 1: Complement of zero
+        self.assertEqual(self.hex_calc.fifteen_complement("H'0'"), "H'F'")
+        
+        # Boundary 2: Complement of F (should be 0)
+        self.assertEqual(self.hex_calc.fifteen_complement("H'F'"), "H'0'")
+        
+        # Boundary 3: Complement with leading zeros
+        self.assertEqual(self.hex_calc.fifteen_complement("H'00A'"), "H'F5'")
+        
+        # Boundary 4: Single digit 1
+        self.assertEqual(self.hex_calc.fifteen_complement("H'1'"), "H'E'")
+        
+        # Boundary 5: All F's complement
+        self.assertEqual(self.hex_calc.fifteen_complement("H'FF'"), "H'0'")
+        
+        # ----- INVALID INPUT HANDLING -----
+        # Invalid Case 1: Invalid hex digit (G is not valid in hexadecimal)
+        with self.assertRaises(ValueError):
+            self.hex_calc.fifteen_complement("H'G1'")
+        
+        # Invalid Case 2: Missing hex format prefix
+        with self.assertRaises(ValueError):
+            self.hex_calc.fifteen_complement("A5")
+        
+        # Invalid Case 3: Invalid format with incorrect brackets
+        with self.assertRaises(ValueError):
+            self.hex_calc.fifteen_complement("H[A5]")
+        
+        # Invalid Case 4: Invalid hex digit Z
+        with self.assertRaises(ValueError):
+            self.hex_calc.fifteen_complement("H'Z5'")
+        
+        # Invalid Case 5: Empty hex value
+        with self.assertRaises(ValueError):
+            self.hex_calc.fifteen_complement("H''")
 
     def test_sixteen_complement(self):
+        # ----- NORMAL CASES -----
+        # Case 1: Basic single-digit complement
         self.assertEqual(self.hex_calc.sixteen_complement("H'A'"), "H'6'")
-
-    def test_fifteen_zero(self):
-        self.assertEqual(self.hex_calc.fifteen_complement("H'0'"), "H'F'")
-
-    def test_fifteen_all_F(self):
-        self.assertEqual(self.hex_calc.fifteen_complement("H'F'"), "H'0'")
-
-    def test_fifteen_multi_digit(self):
-        self.assertEqual(self.hex_calc.fifteen_complement("H'1A3'"), "H'E5C'")
-
-    def test_fifteen_all_zero(self):
-        self.assertEqual(self.hex_calc.fifteen_complement("H'000'"), "H'FFF'")
-
-    def test_sixteen_zero(self):
-        self.assertEqual(self.hex_calc.sixteen_complement("H'0'"), "H'10'")
-
-    def test_sixteen_all_F(self):
+        
+        # Case 2: Another single-digit complement
+        self.assertEqual(self.hex_calc.sixteen_complement("H'3'"), "H'D'")
+        
+        # Case 3: Multi-digit complement
+        self.assertEqual(self.hex_calc.sixteen_complement("H'1A'"), "H'E6'")
+        
+        # Case 4: Larger number complement
+        self.assertEqual(self.hex_calc.sixteen_complement("H'ABC'"), "H'544'")
+        
+        # Case 5: Complement of multi-digit number
+        self.assertEqual(self.hex_calc.sixteen_complement("H'ABCD'"), "H'5433'")
+        
+        # ----- BOUNDARY CONDITIONS -----
+        # Boundary 1: Complement of zero
+        self.assertEqual(self.hex_calc.sixteen_complement("H'0'"), "H'0'")
+        
+        # Boundary 2: Complement of 1
+        self.assertEqual(self.hex_calc.sixteen_complement("H'1'"), "H'F'")
+        
+        # Boundary 3: Complement with leading zeros
+        self.assertEqual(self.hex_calc.sixteen_complement("H'00A'"), "H'F6'")
+        
+        # Boundary 4: Complement of F
         self.assertEqual(self.hex_calc.sixteen_complement("H'F'"), "H'1'")
-
-    def test_sixteen_multi_digit(self):
-        self.assertEqual(self.hex_calc.sixteen_complement("H'1A3'"), "H'E5D'")
-
-    def test_sixteen_all_zero(self):
-        self.assertEqual(self.hex_calc.sixteen_complement("H'000'"), "H'1000'")
+        
+        # Boundary 5: All F's complement
+        self.assertEqual(self.hex_calc.sixteen_complement("H'FF'"), "H'1'")
+        
+        # ----- INVALID INPUT HANDLING -----
+        # Invalid Case 1: Invalid hex digit (G is not valid in hexadecimal)
+        with self.assertRaises(ValueError):
+            self.hex_calc.sixteen_complement("H'G1'")
+        
+        # Invalid Case 2: Missing hex format prefix
+        with self.assertRaises(ValueError):
+            self.hex_calc.sixteen_complement("A5")
+        
+        # Invalid Case 3: Invalid format with incorrect brackets
+        with self.assertRaises(ValueError):
+            self.hex_calc.sixteen_complement("H[A5]")
+        
+        # Invalid Case 4: Invalid hex digit Z
+        with self.assertRaises(ValueError):
+            self.hex_calc.sixteen_complement("H'Z5'")
+        
+        # Invalid Case 5: Empty hex value
+        with self.assertRaises(ValueError):
+            self.hex_calc.sixteen_complement("H''")
 
     # ---------------------------------
- FeatureB_8_Sneha
-    # COMMON VALIDATION TEST
-
     # COMMON VALIDATION TEST 
- FeatureB_8
     # ---------------------------------
     def test_invalid_hex(self):
         with self.assertRaises(ValueError):

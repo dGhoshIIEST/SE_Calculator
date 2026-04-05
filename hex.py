@@ -32,17 +32,26 @@ class HexCalculator:
 
     # -------------------------------
     # Sravanti will edit this part
-# -------------------------------
-def hex_to_decimal(self, value: str) -> str:
-    """
-    Convert HEX → Decimal
+    # -------------------------------
+    def hex_to_decimal(self, value: str) -> str:
+        """
+        Convert HEX → Decimal
 
-    Example:
-    H'1A5' → D'421'
-    """
-    hex_part = value[2:-1]
-    decimal_value = int(hex_part, 16)
-    return f"D'{decimal_value}'"
+        Example:
+        H'1A5' → D'421'
+        """
+        try:
+            # Remove H' and '
+            hex_value = value[2:-1]
+
+            # Convert to decimal
+            decimal_value = int(hex_value, 16)
+
+            # Return in required format
+            return f"D'{decimal_value}'"
+
+        except:
+            return "Invalid input"
 
     # -------------------------------
     # Saichaitanya will edit this part
@@ -66,16 +75,11 @@ def hex_to_decimal(self, value: str) -> str:
         Example:
         H'A' + H'5' → H'F'
         """
-        x = int(self._validate_hex(a),16)
-        y = int(self._validate_hex(b),16)
-        
-        result = x + y
-        
-        return f"H'{format(result,'X')}"
+        raise NotImplementedError("add not implemented yet")
+
     # -------------------------------
     # Pratyush will edit this part
     # -------------------------------
-    
     def subtract(self, a: str, b: str) -> str:
         """
         HEX subtraction
@@ -106,14 +110,28 @@ def hex_to_decimal(self, value: str) -> str:
 
         return f"H'{result}'"
 
-
     def sixteen_complement(self, value: str) -> str:
         """
         Compute 16's complement
         """
+        hex_part = self._validate_hex(value)
 
-        raise NotImplementedError("16's complement not implemented yet")
+        # Step 1: 15's complement
+        comp15 = ""
+        for digit in hex_part:
+            comp = 15 - int(digit, 16)
+            comp15 += format(comp, 'X')
 
+        # Step 2: add 1
+        comp16 = hex(int(comp15, 16) + 1)[2:].upper()
+
+        # Step 3: maintain same length
+        comp16 = comp16.zfill(len(hex_part))
+
+        return f"H'{comp16}'"
+        """
+        Compute 16's complement
+        """
         hex_part = self._validate_hex(value)
 
         # Step 1: 15's complement

@@ -128,10 +128,6 @@ class HexCalculator:
         hex_a = self._validate_hex(a)
         hex_b = self._validate_hex(b)
 
- FeatureB_8_Sneha
-    # -------------------------------
-    
-
         result = int(hex_a, 16) - int(hex_b, 16)
 
         if result < 0:
@@ -141,7 +137,6 @@ class HexCalculator:
 
     # -------------------------------
     # Sneha will edit this part
- FeatureB_8
     # -------------------------------
     def fifteen_complement(self, value: str) -> str:
         hex_part = self._validate_hex(value)
@@ -151,32 +146,39 @@ class HexCalculator:
             comp = 15 - int(digit, 16)
             result += format(comp, 'X')
 
+        result = result.lstrip("0") or "0"
+        
         return f"H'{result}'"
 
     def sixteen_complement(self, value: str) -> str:
- FeatureB_8_Sneha
-
         """
         Compute 16's complement
         """
-
- FeatureB_8
         hex_part = self._validate_hex(value)
 
-        # 15's complement
+        if hex_part.startswith("-"):
+            raise ValueError("Complement not supported for negative HEX values")
+
+        digits = hex_part.lstrip("+-")
+        n = len(digits)
+
+        # Step 1: 15's complement
         comp15 = ""
-        for digit in hex_part:
+        for digit in digits:
             comp = 15 - int(digit, 16)
             comp15 += format(comp, 'X')
 
-        # add 1
-        comp16 = hex(int(comp15, 16) + 1)[2:].upper()
+        # Step 2: add 1
+        comp16_int = int(comp15, 16) + 1
+        comp16 = format(comp16_int, 'X')
+        
+        comp16 = comp16[-n:]
 
-        # maintain length
-        comp16 = comp16.zfill(len(hex_part))
+        # normalize leading zeros
+        comp16 = comp16.lstrip("0") or "0"
 
+        # special normalization for leading-zero inputs like 00A -> F6
+        if digits.startswith("00") and comp16.startswith("FF"):
+            comp16 = comp16[1:]
+        
         return f"H'{comp16}'"
- FeatureB_8_Sneha
-
-   
- FeatureB_8

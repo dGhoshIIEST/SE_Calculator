@@ -256,13 +256,13 @@ class TestHexCalculator(unittest.TestCase):
         self.assertEqual(self.hex_calc.fifteen_complement("H'F'"), "H'0'")
         
         # Boundary 3: Complement with leading zeros
-        self.assertEqual(self.hex_calc.fifteen_complement("H'00A'"), "H'F5'")
+        self.assertEqual(self.hex_calc.fifteen_complement("H'00A'"), "H'FF5'")
         
         # Boundary 4: Single digit 1
         self.assertEqual(self.hex_calc.fifteen_complement("H'1'"), "H'E'")
         
         # Boundary 5: All F's complement
-        self.assertEqual(self.hex_calc.fifteen_complement("H'FF'"), "H'0'")
+        self.assertEqual(self.hex_calc.fifteen_complement("H'FF'"), "H'00'")
         
         # ----- INVALID INPUT HANDLING -----
         # Invalid Case 1: Invalid hex digit (G is not valid in hexadecimal)

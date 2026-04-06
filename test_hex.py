@@ -30,7 +30,7 @@ class TestHexCalculator(unittest.TestCase):
     self.assertEqual(
         self.hex_calc.decimal_to_hex("D'15'"),
         "H'F'"
-    )
+        )
     # ---------------------------------
     # JOYDIP 3 TESTS
     # ---------------------------------

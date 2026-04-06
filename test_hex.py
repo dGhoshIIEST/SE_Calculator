@@ -19,7 +19,7 @@ class TestHexCalculator(unittest.TestCase):
         )
 
     # ---------------------------------
-    # SAICHAITANYA 2 TESTS
+    # SAICHAITANYA 3 TESTS
     # ---------------------------------
     def test_decimal_to_hex(self):
         self.assertEqual(

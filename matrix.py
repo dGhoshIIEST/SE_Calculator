@@ -1,6 +1,21 @@
-def parse_matrix(mat_str):
+def parse_matrix(self, mat_str):
     import ast
-    return ast.literal_eval(mat_str)
+
+    try:
+        mat = ast.literal_eval(mat_str)
+
+        if not isinstance(mat, list) or not mat:
+            raise ValueError("Invalid matrix")
+
+        row_len = len(mat[0])
+        for row in mat:
+            if not isinstance(row, list) or len(row) != row_len:
+                raise ValueError("Irregular matrix")
+
+        return mat
+
+    except:
+        raise ValueError("Invalid matrix format")
 
 def matrix_add(self, A, B):
     A = self.parse_matrix(A)

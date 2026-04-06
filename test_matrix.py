@@ -7,3 +7,8 @@ def test_multiply():
     from matrix import Matrix
     m = Matrix()
     assert m.matrix_multiply('[[1,2],[3,4]]', '[[5,6],[7,8]]') == '[[19, 22], [43, 50]]'
+
+def test_transpose():
+    from matrix import Matrix
+    m = Matrix()
+    assert m.matrix_transpose('[[1,2],[3,4]]') == '[[1, 3], [2, 4]]'

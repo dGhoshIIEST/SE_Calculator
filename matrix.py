@@ -25,7 +25,6 @@ def matrix_add(self, A, B):
     return str(result)
 
 def subtract_matrix(a, b): pass
-def multiply_matrix(a, b): pass
 
 def matrix_multiply(self, A, B):
     A = self.parse_matrix(A)
@@ -54,4 +53,20 @@ def matrix_multiply(self, A, B):
 
     return str(result)
 
-def transpose_matrix(a): pass
+def matrix_transpose(self, A):
+    A = self.parse_matrix(A)
+
+    if not A:
+        raise ValueError("Empty matrix")
+
+    rows = len(A)
+    cols = len(A[0])
+
+    result = []
+    for j in range(cols):
+        row = []
+        for i in range(rows):
+            row.append(A[i][j])
+        result.append(row)
+
+    return str(result)

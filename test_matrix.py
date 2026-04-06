@@ -12,3 +12,8 @@ def test_transpose():
     from matrix import Matrix
     m = Matrix()
     assert m.matrix_transpose('[[1,2],[3,4]]') == '[[1, 3], [2, 4]]'
+
+def test_subtract():
+    from matrix import Matrix
+    m = Matrix()
+    assert m.matrix_subtract('[[5,6],[7,8]]', '[[1,2],[3,4]]') == '[[4, 4], [4, 4]]'

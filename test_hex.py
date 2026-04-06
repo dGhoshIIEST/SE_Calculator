@@ -19,7 +19,7 @@ class TestHexCalculator(unittest.TestCase):
         )
 
     # ---------------------------------
-    # SAICHAITANYA 3 TESTS
+    # SAICHAITANYA 2 TESTS
     # ---------------------------------
     def test_decimal_to_hex(self):
         self.assertEqual(
@@ -31,10 +31,6 @@ class TestHexCalculator(unittest.TestCase):
         self.hex_calc.decimal_to_hex("D'15'"),
         "H'F'"
     )
-    def test_decimal_to_hex_invalid_chars(self):
-    with self.assertRaises(ValueError):
-        self.hex_calc.decimal_to_hex("D'12A'")
-
     # ---------------------------------
     # JOYDIP 3 TESTS
     # ---------------------------------

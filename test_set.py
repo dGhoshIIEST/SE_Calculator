@@ -1,8 +1,7 @@
 import itertools
 import unittest
-
-from set import InvalidSetFormat, SetCalculator, SetFormatter, SetParser, UnsupportedOperation
-
+from set import SetCalculator, SetFormatter, SetParser
+from set import InvalidSetFormat, UnsupportedOperation
 
 class TestSetOperations(unittest.TestCase):
 

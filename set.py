@@ -5,10 +5,6 @@ from abc import ABC, abstractmethod
 class CalculatorError(Exception):
     """
     Base class for all calculator-related exceptions.
-
-    This allows catching all custom exceptions using:
-        except CalculatorError:
-            ...
     """
     pass
 
@@ -16,14 +12,6 @@ class InvalidSetFormat(CalculatorError):
     """
     Exception raised when a string does not conform to
     the expected set input format.
-
-    Expected format:
-        "{1, 2, 3}"
-
-    Examples of invalid formats:
-        "{1,,2}"
-        "{a, b}"
-        "1,2,3"
     """
 
     def __init__(self, message: str = "Invalid set format provided.") -> None:
@@ -34,9 +22,6 @@ class UnsupportedOperation(CalculatorError):
     """
     Exception raised when an unsupported set operation
     is requested.
-
-    Example:
-        compute("invalid_operation", A, B)
     """
 
     def __init__(self, operation: str) -> None:
